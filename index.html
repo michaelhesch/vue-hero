@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue Hero</title>
+
+  <script src="https://unpkg.com/vue"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" />
+</head>
+<body>
+  <div id="app">
+    <section class="column is-4">
+      <div class="card">
+        <div class="card-image">
+          <div class="image is-4by3">
+            <img :src="image">
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="media">
+            <div class="media-content">
+              <p class="title is-4">{{ name }}</p>
+            </div>
+          </div>
+          <div class="content">
+            <p>{{ description }}</p>
+            
+            <a :href="link" target="_blank">Google</a>
+
+            <hr>
+
+            <span class="tag" v-for="interest in interests" :key="interest.id">{{ interest.title }}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script type="text/javascript">
+    var app = new Vue({
+      el: '#app',
+      data: {
+        name: 'Vue Hero',
+        description: 'This is the description',
+        image: "https://bulma.io/images/placeholders/1280x960.png",
+        link: "https://www.google.com",
+        interests: [
+          {"id": 1, "title": "Interest 1"},
+          {"id": 2, "title": "Interest 2"},
+          {"id": 3, "title": "Interest 3"},
+        ]
+      }
+    })
+  </script>
+</body>
+</html>
