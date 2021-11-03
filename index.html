@@ -30,8 +30,9 @@
             <a :href="link" target="_blank">Google</a>
 
             <hr>
-
-            <span class="tag" v-for="interest in interests" :key="interest.id">{{ interest.title }}</span>
+            {{ numberOfInterests }}
+            <br>
+            <span class="tag" v-for="interest in interests">{{ interest }}</span>
           </div>
         </div>
       </div>
@@ -46,11 +47,12 @@
         description: 'This is the description',
         image: "https://bulma.io/images/placeholders/1280x960.png",
         link: "https://www.google.com",
-        interests: [
-          {"id": 1, "title": "Interest 1"},
-          {"id": 2, "title": "Interest 2"},
-          {"id": 3, "title": "Interest 3"},
-        ]
+        interests: ['Vue', 'Js', 'HTML']
+      },
+      computed: {
+        numberOfInterests () {
+          return 'Number of interests: ' + this.interests.length
+        } 
       }
     })
   </script>
