@@ -11,22 +11,24 @@
 </head>
 <body>
   <div id="app">
-    <section class="column is-4">
-      <div class="card">
-        <card-image :image="image"></card-image>
-        <div class="card-content">
-          <div class="media">
-            <div class="media-content">
-              <p class="title is-4">{{ name }}</p>
+    <section class="columns">
+      <div class="column is-4">
+        <div class="card">
+          <card-image :image="image"></card-image>
+          <div class="card-content">
+            <div class="media">
+              <div class="media-content">
+                <p class="title is-4">{{ name }}</p>
+              </div>
             </div>
-          </div>
-          <div class="content">
-            <p>{{ description }}</p>
-            <a :href="link" target="_blank">Google</a>
-            <hr>
-            {{ numberOfInterests }}
-            <br>
-            <span class="tag" v-for="interest in interests">{{ interest }}</span>
+            <div class="content">
+              <p>{{ description }}</p>
+              <a :href="link" target="_blank">Google</a>
+              <hr>
+              {{ numberOfInterests }}
+              <br>
+              <span class="tag" v-for="interest in interests">{{ interest }}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -45,12 +47,9 @@
             <textarea class="textarea" v-model="description"></textarea>
           </div>
         </div>
-        <div class="field is-grouped">
-          <div class="control">
-            <input v-model="interest" class="input">
-            <button @click="addInterest">Add</button>
-          </div>
-        </div>
+        <hr>
+        <h3>Add Interest</h3>
+        <add-interest @change="addInterest"></add-interest>
       </div>
     </section>
   </div>
@@ -68,6 +67,29 @@
         </div>
       `
     })
+    Vue.component('add-interest', {
+      template: `
+        <div class="field is-grouped">
+          <div class="control">
+            <input v-model="interest" class="input">
+          </div>
+          <div class="control">
+            <button @click="addInterest" class="button">Add</button>
+          </div>
+        </div>
+      `,
+      data () {
+        return {
+          interest: null
+        }
+      },
+      methods: {
+        addInterest() {
+          this.$emit('change', this.interest)
+          this.interest = null
+        }
+      }
+    })
     var app = new Vue({
       el: '#app',
       data: {
@@ -84,10 +106,8 @@
         } 
       },
       methods: {
-        addInterest() {
-          this.interests.push(this.interest)
-
-          this.interest = null
+        addInterest (interest) {
+          this.interests.push(interest)
         }
       }
     })
