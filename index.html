@@ -30,6 +30,28 @@
           </div>
         </div>
       </div>
+      <div class="column is-6">
+        <div class="field">
+          <div class="control">
+            <label>Name</label>
+            <br>
+            <input class="input" v-model="name">
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <label>Description</label>
+            <br>
+            <textarea class="textarea" v-model="description"></textarea>
+          </div>
+        </div>
+        <div class="field is-grouped">
+          <div class="control">
+            <input v-model="interest" class="input">
+            <button @click="addInterest">Add</button>
+          </div>
+        </div>
+      </div>
     </section>
   </div>
 
@@ -53,12 +75,20 @@
         description: 'This is the description',
         image: "https://bulma.io/images/placeholders/1280x960.png",
         link: "https://www.google.com",
-        interests: ['Vue', 'Js', 'HTML']
+        interests: ['Vue', 'Js', 'HTML'],
+        interest: null
       },
       computed: {
         numberOfInterests () {
           return 'Number of interests: ' + this.interests.length
         } 
+      },
+      methods: {
+        addInterest() {
+          this.interests.push(this.interest)
+
+          this.interest = null
+        }
       }
     })
   </script>
