@@ -13,11 +13,7 @@
   <div id="app">
     <section class="column is-4">
       <div class="card">
-        <div class="card-image">
-          <div class="image is-4by3">
-            <img :src="image">
-          </div>
-        </div>
+        <card-image :image="image"></card-image>
         <div class="card-content">
           <div class="media">
             <div class="media-content">
@@ -26,9 +22,7 @@
           </div>
           <div class="content">
             <p>{{ description }}</p>
-            
             <a :href="link" target="_blank">Google</a>
-
             <hr>
             {{ numberOfInterests }}
             <br>
@@ -40,6 +34,18 @@
   </div>
 
   <script type="text/javascript">
+    Vue.component('card-image', {
+      props: {
+        image: String
+      },
+      template: `
+        <div class="card-image">
+          <div class="image is-4by3">
+            <img :src="image">
+          </div>
+        </div>
+      `
+    })
     var app = new Vue({
       el: '#app',
       data: {
